@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stadash | Simplified Project Management</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Stadash is a simplified project management tool with no learning curve. Manage projects, finances, files, and more - all in one solution.">
+    <meta name="keywords" content="project management, team collaboration, kanban board, startup tools, simplified management">
+    <meta name="author" content="Stadash">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Stadash | Simplified Project Management">
+    <meta property="og:description" content="One solution for all your project management needs without the complexity.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stadash.com">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stadash | Simplified Project Management">
+    <meta name="twitter:description" content="One solution for all your project management needs without the complexity.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    
+    <style>
+        :root {
+            --primary: #30b8b2;
+            --primary-dark: #1e8c87;
+            --secondary: #35646d;
+            --light-bg: #e8f7f6;
+            --text-dark: #2d3b45;
+            --text-light: #718096;
+            --white: #ffffff;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: var(--transition);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .join-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(48, 184, 178, 0.3);
+        }
+        
+        .join-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(48, 184, 178, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .learn-more {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .learn-more:hover {
+            background-color: rgba(48, 184, 178, 0.1);
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .dashboard-preview {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--text-light);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(48, 184, 178, 0.3);
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .step-description {
+            color: var(--text-light);
+            max-width: 250px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .testimonial-slider {
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-slide {
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin: 0 15px;
+        }
+        
+        .testimonial-content {
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(48, 184, 178, 0.2);
+            position: absolute;
+            top: -20px;
+            left: -20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-company {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-btn {
+            background-color: var(--white);
+            color: var(--primary);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            background-color: var(--text-dark);
+            color: var(--white);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-logo img {
+            height: 30px;
+        }
+        
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+        }
+        
+        .footer-links h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-in-out;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-in-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-in-out;
+        }
+
+        /* Tab Animation */
+        .tab-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .tab-content {
+            min-height: 300px;
+            padding: 30px;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* Projects Tab Content */
+        .kanban-board {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .kanban-column {
+            min-width: 250px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .kanban-column-title {
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .kanban-card {
+            background-color: var(--white);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .kanban-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .card-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        /* Finances Tab Content */
+        .finance-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .chart-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .chart-title {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            height: 200px;
+            position: relative;
+        }
+        
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(90deg, 
+                transparent 0%, var(--primary) 10%, 
+                var(--primary) 20%, transparent 25%,
+                transparent 30%, var(--primary) 40%, 
+                var(--primary) 50%, transparent 60%,
+                transparent 70%, var(--primary) 80%, 
+                var(--primary) 90%, transparent 100%);
+            clip-path: polygon(
+                0% 100%, 10% 70%, 20% 90%, 25% 40%, 
+                30% 60%, 40% 20%, 50% 40%, 60% 10%, 
+                70% 30%, 80% 0%, 90% 20%, 100% 10%, 
+                100% 100%
+            );
+            opacity: 0.7;
+        }
+        
+        .chart-bars {
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-top: 20px;
+        }
+        
+        .chart-bar {
+            width: 8%;
+            background: linear-gradient(to top, var(--primary), var(--secondary));
+            border-radius: 4px 4px 0 0;
+            transition: var(--transition);
+        }
+        
+        /* Files Tab Content */
+        .file-browser {
+            display: flex;
+            height: 100%;
+        }
+        
+        .folder-tree {
+            width: 30%;
+            padding-right: 20px;
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .folder {
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .folder:hover {
+            background-color: rgba(48, 184, 178, 0.1);
+        }
+        
+        .folder.active {
+            background-color: rgba(48, 184, 178, 0.2);
+            color: var(--primary);
+        }
+        
+        .file-list {
+            flex: 1;
+            padding-left: 20px;
+        }
+        
+        .file {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .file:hover {
+            background-color: var(--light-bg);
+        }
+        
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(48, 184, 178, 0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 500;
+        }
+        
+        .file-meta {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .finance-charts {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Gradients and Effects */
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(48, 184, 178, 0.1), rgba(53, 100, 109, 0.1));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .shadow-hover {
+            transition: var(--transition);
+        }
+        
+        .shadow-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Animation for dashboard tabs */
+        .tab-indicator {
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: absolute;
+            bottom: 0;
+            transition: var(--transition);
+        }
+        
+        /* Animated gradient background */
+        .animated-gradient {
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(48, 184, 178, 0.2), rgba(53, 100, 109, 0.1), rgba(48, 184, 178, 0.05));
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: gradientMove 15s infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes gradientMove {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-10%, 10%) scale(1.1);
+            }
+            100% {
+                transform: translate(10%, -10%) scale(0.9);
+            }
+        }
+		
+		/* Calendar Premium-Style */
+/* Calendar Premium-Style Vertical Layout */
+.calendar-organizer-vertical {
+    display: flex;
+    flex-direction: row;   /* CHANGED from column */
+    align-items: flex-start;
+    gap: 48px;             /* More horizontal gap for spacing */
+    padding: 28px 0 10px 0;
+    width: 100%;
+    justify-content: center;
+}
+.calendar-area {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    flex: none;
+}
+.calendar-widget {
+    background: var(--light-bg);
+    border-radius: 10px;
+    padding: 30px 24px 20px 24px;
+    box-shadow: var(--shadow);
+    max-width: 410px;
+    margin: 0 auto;
+    width: 100%;
+}
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+.calendar-header #calendarMonth {
+    font-size: 1.25rem;
+    color: var(--secondary);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.calendar-nav {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 2px 6px rgba(48,184,178,0.16);
+}
+.calendar-nav:hover {
+    background: linear-gradient(to right, var(--secondary), var(--primary));
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+.calendar-day-name {
+    color: var(--text-light);
+    text-align: center;
+    padding-bottom: 6px;
+    font-weight: 600;
+}
+.calendar-day {
+    background: var(--white);
+    text-align: center;
+    padding: 9px 0;
+    border-radius: 6px;
+    min-height: 40px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-dark);
+    position: relative;
+    font-weight: 500;
+}
+.calendar-day.other-month {
+    color: #b7cac8;
+    background: transparent;
+    pointer-events: none;
+}
+.calendar-day.today {
+    border: 2px solid var(--primary);
+    background: linear-gradient(to right, #e5faf7 40%, #faf8f8 100%);
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+.calendar-day.has-event::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+}
+
+.calendar-events-block {
+    width: 100%;
+    max-width: 390px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0; /* removes early vertical margin for horizontal view */
+}
+
+.calendar-events-title {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+    color: var(--secondary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.calendar-events-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.calendar-event-card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid #e2efee;
+    padding: 18px 26px 14px 22px;
+    font-size: 1.08rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    min-height: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.calendar-event-card:hover {
+    box-shadow: 0 8px 24px rgba(34,192,192,0.10);
+    transform: translateY(-3px) scale(1.03);
+}
+.calendar-event-title {
+    font-weight: 600;
+    font-size: 1.06rem;
+    margin-bottom: 5px;
+}
+.calendar-event-time {
+    color: var(--text-light);
+    font-size: 0.92rem;
+}
+
+@media (max-width: 950px) {
+    .calendar-organizer-vertical {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+    }
+    .calendar-events-block,
+    .calendar-area {
+        width: 100%;
+        max-width: unset;
+        align-items: center;
+    }
+    .calendar-widget {
+        min-width: 0;
+        max-width: 98vw;
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .calendar-widget { padding: 12px 2px; }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="icon.svg" alt="Stadash Logo">
+                    <span>Stadash</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <button class="join-btn" id="joinBtn">Join Now</button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content slide-in-left">
+                <h1 class="hero-title">One solution for all your project management needs</h1>
+                <p class="hero-subtitle">Stadash simplifies project management with a no-learning-curve approach. Choose only the tools you need, create projects instantly, and focus on what matters most - your work.</p>
+                <div class="cta-buttons">
+                    <button class="join-btn" id="heroCta">Join Now</button>
+                    <button class="learn-more">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image slide-in-right">
+                <div class="animated-gradient"></div>
+                <div class="tab-container">
+                    <div class="tabs">
+    <div class="tab active">Projects</div>
+    <div class="tab">Files</div>
+    <div class="tab">Finances</div>
+    <div class="tab">Calendar</div>
+</div>
+                    <div class="tab-content active" id="projects-tab">
+                        <div class="kanban-board">
+                            <div class="kanban-column">
+                                <div class="kanban-column-title">
+                                    <span>To Do</span>
+                                    <span>3</span>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">Website Redesign</div>
+                                    <div class="card-description">Update the homepage with new branding elements</div>
+                                    <div class="card-footer">
+                                        <span>Apr 25</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">Content Strategy</div>
+                                    <div class="card-description">Define content guidelines for the blog</div>
+                                    <div class="card-footer">
+                                        <span>Apr 27</span>
+                                        <span>Medium</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">Market Research</div>
+                                    <div class="card-description">Analyze competitor products</div>
+                                    <div class="card-footer">
+                                        <span>Apr 30</span>
+                                        <span>Low</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kanban-column">
+                                <div class="kanban-column-title">
+                                    <span>In Progress</span>
+                                    <span>2</span>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">User Testing</div>
+                                    <div class="card-description">Conduct usability sessions with 5 participants</div>
+                                    <div class="card-footer">
+                                        <span>Apr 24</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">API Integration</div>
+                                    <div class="card-description">Connect payment gateway to the platform</div>
+                                    <div class="card-footer">
+                                        <span>Apr 26</span>
+                                        <span>Medium</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kanban-column">
+                                <div class="kanban-column-title">
+                                    <span>Done</span>
+                                    <span>4</span>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">Wireframes</div>
+                                    <div class="card-description">Create initial mockups for mobile app</div>
+                                    <div class="card-footer">
+                                        <span>Apr 20</span>
+                                        <span>Completed</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">Brand Assets</div>
+                                    <div class="card-description">Finalize logo and color palette</div>
+                                    <div class="card-footer">
+                                        <span>Apr 18</span>
+                                        <span>Completed</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">User Stories</div>
+                                    <div class="card-description">Document primary use cases</div>
+                                    <div class="card-footer">
+                                        <span>Apr 15</span>
+                                        <span>Completed</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="card-title">Competitor Analysis</div>
+                                    <div class="card-description">Research market alternatives</div>
+                                    <div class="card-footer">
+                                        <span>Apr 12</span>
+                                        <span>Completed</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="files-tab">
+                        <div class="file-browser">
+                            <div class="folder-tree">
+                                <div class="folder active">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <span>Marketing</span>
+                                </div>
+                                <div class="folder">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <span>Design</span>
+                                </div>
+                                <div class="folder">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <span>Development</span>
+                                </div>
+                                <div class="folder">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <span>Research</span>
+                                </div>
+                            </div>
+                            <div class="file-list">
+                                <div class="file">
+                                    <div class="file-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="file-info">
+                                        <div class="file-name">Q2 Marketing Strategy.pdf</div>
+                                        <div class="file-meta">2.3 MB • Updated 3 days ago</div>
+                                    </div>
+                                </div>
+                                <div class="file">
+                                    <div class="file-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
+                                            <line x1="7" y1="2" x2="7" y2="22"></line>
+                                            <line x1="17" y1="2" x2="17" y2="22"></line>
+                                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                                            <line x1="2" y1="7" x2="7" y2="7"></line>
+                                            <line x1="2" y1="17" x2="7" y2="17"></line>
+                                            <line x1="17" y1="17" x2="22" y2="17"></line>
+                                            <line x1="17" y1="7" x2="22" y2="7"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="file-info">
+                                        <div class="file-name">Social Media Calendar.xlsx</div>
+                                        <div class="file-meta">1.7 MB • Updated 1 week ago</div>
+                                    </div>
+                                </div>
+                                <div class="file">
+                                    <div class="file-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                            <polyline points="13 2 13 9 20 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="file-info">
+                                        <div class="file-name">Brand Guidelines.pdf</div>
+                                        <div class="file-meta">5.2 MB • Updated 2 weeks ago</div>
+                                    </div>
+                                </div>
+                                <div class="file">
+                                    <div class="file-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="file-info">
+                                        <div class="file-name">Content Strategy.docx</div>
+                                        <div class="file-meta">1.1 MB • Updated 3 weeks ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="finances-tab">
+                        <div class="finance-charts">
+                            <div class="chart-card">
+                                <div class="chart-title">Project Budget</div>
+                                <div class="chart-container">
+                                    <div class="chart-bars">
+                                        <div class="chart-bar" style="height: 60%;"></div>
+                                        <div class="chart-bar" style="height: 80%;"></div>
+                                        <div class="chart-bar" style="height: 40%;"></div>
+                                        <div class="chart-bar" style="height: 70%;"></div>
+                                        <div class="chart-bar" style="height: 50%;"></div>
+                                        <div class="chart-bar" style="height: 90%;"></div>
+                                        <div class="chart-bar" style="height: 65%;"></div>
+                                        <div class="chart-bar" style="height: 75%;"></div>
+                                        <div class="chart-bar" style="height: 45%;"></div>
+                                        <div class="chart-bar" style="height: 55%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-title">Expense Tracking</div>
+                                <div class="chart-container">
+                                    <div class="chart-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="tab-content" id="calendar-tab">
+  <div class="calendar-organizer-vertical">
+    <div class="calendar-area">
+      <div class="calendar-widget" id="calendar-widget"></div>
+    </div>
+    <div class="calendar-events-block">
+      <h4 class="calendar-events-title">Upcoming Events</h4>
+      <div class="calendar-events-list" id="calendar-events-list">
+        <!-- Event cards inserted by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Simplified Project Management</h2>
+            <p class="section-subtitle">Choose only the features you need for your project - no unnecessary complexity.</p>
+            <div class="feature-grid">
+                <div class="feature-card slide-up" style="animation-delay: 0.1s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Kanban Boards</h3>
+                    <p class="feature-description">Visualize your workflow with customizable kanban boards. Track tasks from start to finish with our intuitive drag-and-drop interface.</p>
+                </div>
+                <div class="feature-card slide-up" style="animation-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">File Management</h3>
+                    <p class="feature-description">Store, organize, and access project files in one centralized location. No more searching through endless emails and folders.</p>
+                </div>
+                <div class="feature-card slide-up" style="animation-delay: 0.3s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Financial Tracking</h3>
+                    <p class="feature-description">Monitor project budgets and expenses with powerful financial tools. Generate reports and stay on top of your finances.</p>
+                </div>
+                <div class="feature-card slide-up" style="animation-delay: 0.4s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Calendar Integration</h3>
+                    <p class="feature-description">Schedule meetings, set deadlines, and view project timelines with our integrated calendar. Sync with your existing calendar apps.</p>
+                </div>
+                <div class="feature-card slide-up" style="animation-delay: 0.5s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Notes & Documentation</h3>
+                    <p class="feature-description">Create, edit, and share project notes and documentation. Keep all your important information in one searchable place.</p>
+                </div>
+                <div class="feature-card slide-up" style="animation-delay: 0.6s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Collaborative Boards</h3>
+                    <p class="feature-description">Brainstorm ideas and visualize concepts with collaborative boards. Work together in real-time, just like using a physical whiteboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section class="how-it-works gradient-bg" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Simple Process, Maximum Efficiency</h2>
+            <p class="section-subtitle">Get started in minutes without the steep learning curve of complex project management tools.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Create a Project</h3>
+                    <p class="step-description">Start by creating a new project with just a name and optional description.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Choose Features</h3>
+                    <p class="step-description">Select only the features you need for your specific project requirements.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Invite Team</h3>
+                    <p class="step-description">Add team members and assign roles with our straightforward permission system.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Start Working</h3>
+                    <p class="step-description">Begin collaborating immediately without wasting time figuring out how to use the tool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Teams of all sizes love Stadash for its simplicity and powerful features.</p>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        Stadash has transformed how our startup manages projects. We used to waste hours figuring out complex tools, but with Stadash, we were up and running in minutes. It's intuitive and has everything we need without the bloat.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SA</div>
+                        <div class="author-info">
+                            <h4>Sarah Anderson</h4>
+                            <div class="author-company">Founder, TechPulse</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="features" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Choose the plan that works best for your team.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">Basic</h3>
+                    <div class="gradient-text" style="font-size: 2.5rem; font-weight: 700; margin: 20px 0;">Free</div>
+                    <p class="feature-description">Perfect for small teams just getting started.</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Up to 5 projects</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Basic project features</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>1GB storage</span>
+                        </li>
+                    </ul>
+                    <button class="join-btn" style="width: 100%;">Get Started</button>
+                </div>
+                <div class="feature-card" style="transform: scale(1.05); border: 2px solid var(--primary);">
+                    <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">MOST POPULAR</div>
+                    <h3 class="feature-title">Professional</h3>
+                    <div class="gradient-text" style="font-size: 2.5rem; font-weight: 700; margin: 20px 0;">$12<span style="font-size: 1rem; color: var(--text-light);">/month</span></div>
+                    <p class="feature-description">Ideal for growing teams and businesses.</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Unlimited projects</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>All project features</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>20GB storage</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Advanced analytics</span>
+                        </li>
+                    </ul>
+                    <button class="join-btn" style="width: 100%;">Try For Free</button>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Enterprise</h3>
+                    <div class="gradient-text" style="font-size: 2.5rem; font-weight: 700; margin: 20px 0;">Custom</div>
+                    <p class="feature-description">For large organizations with specific needs.</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Everything in Professional</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Unlimited storage</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Priority support</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Custom integrations</span>
+                        </li>
+                    </ul>
+                    <button class="learn-more" style="width: 100%;">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to simplify your project management?</h2>
+            <p class="cta-subtitle">Join thousands of teams who have streamlined their workflow with Stadash. Get started today and see the difference.</p>
+            <button class="cta-btn" id="ctaBtn">Join Now for Free</button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <img src="icon.svg" alt="Stadash Logo">
+                        <span>Stadash</span>
+                    </div>
+                    <p class="footer-description">One solution for all your project management needs. Simple, intuitive, and powerful.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 616 8a6 6 0 1 0-8 5.477V21a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 1 1-1h2a1 1 0 0 0 1-1v-2.523A6 6 0 0 0 16 8z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> Stadash. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Hero section animated tabs
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabs.forEach((tab, i) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                tabContents[i].classList.add('active');
+            });
+        });
+
+        // 'Join Now' button handler (opens Tally.so form in new tab)
+        const tallyUrl = 'https://tally.so/r/your-form-id'; // <-- REPLACE with your actual Tally.so form URL
+
+        function openTally() {
+            window.open(tallyUrl, '_blank');
+        }
+        document.getElementById('joinBtn').onclick = openTally;
+        document.getElementById('heroCta').onclick = openTally;
+        const ctaBtn = document.getElementById('ctaBtn');
+        if(ctaBtn) ctaBtn.onclick = openTally;
+
+        // Pricing CTA buttons
+        document.querySelectorAll('.feature-card .join-btn').forEach(btn => {
+            btn.onclick = openTally;
+        });
+
+        // Dynamic year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Optional: Animate features on scroll
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.slide-up').forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 50) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        // Init fade in for features
+        document.querySelectorAll('.slide-up').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            setTimeout(() => {
+                el.style.transition = 'all 0.7s cubic-bezier(0.4,0,0.2,1)';
+            }, 50);
+        });
+// Demo: Always show 3 upcoming example events below the calendar
+const teamEvents = [
+  { title: "Kick-off Meeting", date: "2025-04-22", time: "10:00 AM" },
+  { title: "Design Review", date: "2025-04-23", time: "2:00 PM" },
+  { title: "Product Launch", date: "2025-04-24", time: "4:00 PM" }
+];
+
+// Calendar logic (renders calendar, doesn't change)
+(function(){
+  const calendarContainer = document.getElementById("calendar-widget");
+  if(!calendarContainer) return;
+
+  let focusedDate = new Date();
+
+  function formatDateISO(dt) {
+    return dt.toISOString().slice(0,10);
+  }
+
+  function renderMiniCalendar(date) {
+    const y = date.getFullYear(), m = date.getMonth();
+    const today = new Date();
+    const firstDay = new Date(y, m, 1);
+    const lastDay = new Date(y, m + 1, 0);
+    const startDay = firstDay.getDay();
+    const daysInMonth = lastDay.getDate();
+    const monthNames = [
+      "January","February","March","April","May","June","July",
+      "August","September","October","November","December"
+    ];
+
+    calendarContainer.innerHTML = `
+      <div class="calendar-header">
+        <button class="calendar-nav" id="prevMonth">&#8592;</button>
+        <span id="calendarMonth">${monthNames[m]} ${y}</span>
+        <button class="calendar-nav" id="nextMonth">&#8594;</button>
+      </div>
+      <div class="calendar-grid">
+        <div class="calendar-day-name">Sun</div>
+        <div class="calendar-day-name">Mon</div>
+        <div class="calendar-day-name">Tue</div>
+        <div class="calendar-day-name">Wed</div>
+        <div class="calendar-day-name">Thu</div>
+        <div class="calendar-day-name">Fri</div>
+        <div class="calendar-day-name">Sat</div>
+      </div>
+    `;
+
+    let grid = calendarContainer.querySelector('.calendar-grid');
+    // Prev month
+    let prevMonthEnd = new Date(y, m, 0).getDate();
+    for(let i=0;i<startDay;i++) {
+      let d = document.createElement('div');
+      d.className = 'calendar-day other-month';
+      d.textContent = prevMonthEnd - startDay + i + 1;
+      grid.appendChild(d);
+    }
+    // This month
+    for(let i=1;i<=daysInMonth;i++) {
+      let d = document.createElement('div');
+      d.className = 'calendar-day';
+      d.textContent = i;
+      let dayISO = `${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+      const isToday =
+        i === today.getDate() && m === today.getMonth() && y === today.getFullYear();
+      if(isToday) d.classList.add('today');
+      if(teamEvents.some(ev=>ev.date===dayISO)) {
+        d.classList.add('has-event');
+        d.title = "Events: " + teamEvents.filter(ev=>ev.date===dayISO).map(ev=>ev.title).join(', ');
+      }
+      grid.appendChild(d);
+    }
+    // Fill week
+    let remain = (startDay+daysInMonth)%7;
+    if(remain) {
+      for(let i=1;i<=7-remain;i++) {
+        let d=document.createElement('div');
+        d.className='calendar-day other-month';
+        d.textContent = i;
+        grid.appendChild(d);
+      }
+    }
+    // Nav
+    calendarContainer.querySelector("#prevMonth").onclick=function(){
+      focusedDate.setMonth(focusedDate.getMonth()-1);
+      renderMiniCalendar(focusedDate);
+    }
+    calendarContainer.querySelector("#nextMonth").onclick=function(){
+      focusedDate.setMonth(focusedDate.getMonth()+1);
+      renderMiniCalendar(focusedDate);
+    }
+  }
+  renderMiniCalendar(focusedDate);
+
+  // Render events below
+  function renderEventCards() {
+    const eventsList = document.getElementById("calendar-events-list");
+    if (!eventsList) return;
+    eventsList.innerHTML = "";
+    teamEvents.forEach(ev => {
+      let card = document.createElement("div");
+      card.className = "calendar-event-card";
+      card.innerHTML = `
+        <div class="calendar-event-title">${ev.title}</div>
+        <div class="calendar-event-time">${ev.date} &nbsp; ${ev.time}</div>
+      `;
+      eventsList.appendChild(card);
+    });
+  }
+  renderEventCards();
+})();
+    </script>
+</body>
+</html>
