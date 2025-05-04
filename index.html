@@ -511,7 +511,7 @@
 @media (max-width: 520px) {
     .finances-view { flex-direction: column !important; }
 }
-        
+
         @keyframes float {
             0% {
                 transform: translate(0px, 0px) scale(1);
@@ -523,7 +523,7 @@
                 transform: translate(0px, 0px) scale(1);
             }
         }
-        
+
         /* Animation for cards appearing */
         @keyframes fadeInUp {
             from {
@@ -535,11 +535,11 @@
                 transform: translateY(0);
             }
         }
-        
+
         .animated {
             animation: fadeInUp 0.6s ease-out forwards;
         }
-        
+
         /* Delay each item */
         .features-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
         .features-grid .feature-card:nth-child(2) { animation-delay: 0.2s; }
@@ -547,49 +547,49 @@
         .features-grid .feature-card:nth-child(4) { animation-delay: 0.4s; }
         .features-grid .feature-card:nth-child(5) { animation-delay: 0.5s; }
         .features-grid .feature-card:nth-child(6) { animation-delay: 0.6s; }
-        
+
         /* Mobile responsiveness */
         @media (max-width: 992px) {
             .hero-content {
                 flex-direction: column;
             }
-            
+
             .hero-text h1 {
                 font-size: 2.5rem;
             }
-            
+
             .demo-card {
                 transform: none;
                 margin-top: 40px;
             }
-            
+
             .demo-card:hover {
                 transform: translateY(-5px);
             }
         }
-        
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
-            
+
             .hero {
                 padding: 120px 0 60px;
             }
-            
+
             .hero-text h1 {
                 font-size: 2rem;
             }
-            
+
             .section-title h2 {
                 font-size: 2rem;
             }
-            
+
             .cta h2 {
                 font-size: 2rem;
             }
         }
-        
+
         /* Mobile menu button */
         .mobile-menu-btn {
             display: none;
@@ -599,7 +599,7 @@
             cursor: pointer;
             color: var(--secondary);
         }
-        
+
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
@@ -688,6 +688,11 @@
 .finances-view svg > circle[stroke] {
     transition: stroke-dashoffset 1s;
 }
+        @media (max-width: 600px) {
+            .hero-demo {
+                display: none !important;
+            }
+        }
 /* --- END: Dashboard Visual/Animation Improvements --- */
 </style>
 </head>
